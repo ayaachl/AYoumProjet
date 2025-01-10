@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYouM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="relative mx-auto mt-20 w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+        <div class="w-full text-center">
+            <h1 class="text-3xl font-semibold text-gray-900">Se Connecter</h1>
+            <p class="mt-2 text-gray-500">Connectez-vous pour accéder à votre compte</p>
+        </div>
+        <form id="login-form" class="mt-5">
+            <div class="relative mt-6">
+                <input type="email" name="email" id="email" placeholder="Email Address" class="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" required />
+                <label for="email" class="absolute top-0 left-0 -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:text-sm peer-focus:text-gray-800">Email Address</label>
+            </div>
+            <div class="relative mt-6">
+                <input type="password" name="password" id="password" placeholder="Password" class="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" required />
+                <label for="password" class="absolute top-0 left-0 -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:text-sm peer-focus:text-gray-800">Password</label>
+            </div>
+            <div class="my-6">
+                <button type="submit" class="w-full rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none">Se connecter</button>
+            </div>
+        </form>
+        <div id="error-message" class="text-red-500 hidden mt-2 text-center">Identifiants incorrects</div>
+    </div>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch("http://localhost:3000/admin");
+                const admins = await response.json();
+
+                const user = admins.find(admin => admin.email === email && admin.password === password);
+
+                if (user) {
+                    window.location.href = "admin.html";
+                } else {
+                    const errorMessage = document.getElementById("error-message");
+                    errorMessage.textContent = "Identifiants incorrects";
+                    errorMessage.classList.remove("hidden");
+                }
+            } catch (error) {
+                const errorMessage = document.getElementById("error-message");
+                errorMessage.textContent = "Une erreur est survenue. Veuillez réessayer plus tard.";
+                errorMessage.classList.remove("hidden");
+                console.error("Erreur de connexion:", error);
+            }
+        });
+    </script>
+</body>
+</html>

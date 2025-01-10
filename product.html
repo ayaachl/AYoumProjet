@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYouM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .w-23 { width: 8.75rem; }
+        .imgg { width: 13.75rem; }
+        .color-noir { background-color: black; }
+        .color-blanc { background-color: white; border: 1px solid #ccc; }
+        .color-vert-eau { background-color: #abcbb6; }
+        .color-mauve-fonce { background-color: #684d74; }
+        .color-bleu { background-color: #6389b3; }
+        .color-gris { background-color: #B0BEC5; }
+        .color-btn { width: 2rem; height: 2rem; border-radius: 50%; cursor: pointer; transition: transform 0.2s ease; }
+        .faq-section { display: none; font-size: 0.875rem; }
+        .w-29 { width: 12.75rem; }
+    </style>
+</head>
+<body class="font-sans bg-gray-100">
+    <header class="bg-black text-white py-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <img src="logo.png" alt="Logo" class="w-23 h-auto">
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="hover:text-gray-400">Accueil</a></li>
+                    <li><a href="product.html" class="hover:text-gray-400">Produit</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400">Contact</a></li>
+                    <li><a href="cart.html" class="hover:text-gray-400">Panier (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="container mx-auto py-16 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 flex justify-center mb-8 md:mb-0">
+            <img id="product-image" src="MN.png" alt="Montre Intelligente AYouM Pro">
+        </div>
+        <div class="md:w-1/2 md:pl-16 text-center md:text-left">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4"><span style="color: #800000;">AYouM</span> Pro</h2>
+            <p class="text-sm text-gray-600 mb-6">Notre montre intelligente AYouM Pro combine élégance et technologie avancée pour suivre votre santé et vos activités quotidiennes. Profitez de son design moderne et de ses fonctionnalités performantes.</p>
+            <p class="text-xl font-bold text-gray-800 mb-4">€299</p>
+            <div class="mb-4">
+                <h3 class="text-sm font-semibold mb-2">Couleurs disponibles :</h3>
+                <div class="relative">
+                    <select id="color-selector" class="appearance-none w-full py-2 px-4 bg-gray-100 focus:outline-none">
+                        <option value="MN.png"></option>
+                        <option value="MB.png"></option>
+                        <option value="MV.png"></option>
+                        <option value="MM.png"></option>
+                        <option value="MBL.png"></option>
+                        <option value="MG.png"></option>
+                    </select>
+                    <div class="absolute inset-0 flex space-x-2">
+                        <button class="color-btn color-noir" data-image="MN.png"></button>
+                        <button class="color-btn color-blanc" data-image="MB.png"></button>
+                        <button class="color-btn color-vert-eau" data-image="MV.png"></button>
+                        <button class="color-btn color-mauve-fonce" data-image="MM.png"></button>
+                        <button class="color-btn color-bleu" data-image="MBL.png"></button>
+                        <button class="color-btn color-gris" data-image="MG.png"></button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-sm font-semibold mb-2">Quantité :</h3>
+            <div class="flex items-center mb-4">
+                <button id="decrease-quantity" class="bg-gray-300 text-black px-3 py rounded-full"><strong>-</strong></button>
+                <span id="quantity" class="mx-4 text-xl">1</span>
+                <button id="increase-quantity" class="bg-gray-300 text-black px-3 py rounded-full"><strong>+</strong></button>
+            </div>
+
+            <div class="flex items-center mb-4">
+                <i id="toggle-faq" class="fas fa-chevron-right ml-2 cursor-pointer text-black text-sm"></i>
+                <span class="text-sm font-bold text-black">&nbsp;&nbsp;Livraison</span>
+            </div>
+            <div id="faq" class="faq-section mt-4">
+                <div class="bg-white shadow-sm p-4 mb-4 rounded-md">
+                    <h4 class="text-sm font-semibold text-gray-800">Livraison Gratuite</h4>
+                    <p class="text-gray-600">Profitez de la livraison gratuite pour la commande de votre Montre Intelligente AYouM Pro.</p>
+                </div>
+                <p class="text-center text-gray-600">La livraison est effectuée sous 3 à 5 jours ouvrables. Pour toute question, veuillez nous contacter.</p>
+            </div>
+
+            <div class="flex items-center mb-4">
+                <i id="toggle-faq-returns" class="fas fa-chevron-right ml-2 cursor-pointer text-black text-sm"></i>
+                <span class="text-sm font-bold text-black">&nbsp;&nbsp;Retour & Échanges</span>
+            </div>
+            <div id="faq-returns" class="faq-section mt-4">
+                <div class="bg-white shadow-sm p-4 mb-4 rounded-md">
+                    <h4 class="text-sm font-semibold text-gray-800">Retours</h4>
+                    <p class="text-gray-600">Les retours sont possibles sous 30 jours après réception du produit. Assurez-vous que l'article soit en parfait état et dans son emballage d'origine.</p>
+                </div>
+                <div class="bg-white shadow-sm p-4 mb-4 rounded-md">
+                    <h4 class="text-sm font-semibold text-gray-800">Échanges</h4>
+                    <p class="text-gray-600">Si le produit ne correspond pas à votre taille ou couleur, vous pouvez l'échanger dans les 30 jours suivant l'achat.</p>
+                </div>
+                <p class="text-center text-gray-600">Les frais de retour sont à la charge du client, sauf en cas de défaut du produit.</p>
+            </div>
+
+            <div class="flex items-center mb-4">
+                <i id="toggle-faq-warranty" class="fas fa-chevron-right ml-2 cursor-pointer text-black text-sm"></i>
+                <span class="text-sm font-bold text-black">&nbsp;&nbsp;Garantie</span>
+            </div>
+            <div id="faq-warranty" class="faq-section mt-4">
+                <div class="bg-white shadow-sm p-4 mb-4 rounded-md">
+                    <h4 class="text-sm font-semibold text-gray-800">Garantie de 2 ans</h4>
+                    <p class="text-gray-600">Notre montre AYouM Pro est couverte par une garantie de 2 ans contre tout défaut de fabrication.</p>
+                </div>
+                <p class="text-center text-gray-600">Pour plus d'informations sur les conditions de garantie, veuillez consulter notre page d'aide ou nous contacter directement.</p>
+            </div>
+
+            <button id="add-to-cart" style="background-color: #800000;" class="text-white px-7 py-2 rounded-full font-bold transition duration-300 ">
+                Ajouter au Panier
+            </button>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white py-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+            <div><img src="logo.png" alt="AYouM Logo" class="w-29 mb-4"></div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4">À propos de nous</h4>
+                <p class="text-sm text-gray-400">Nous fournissons des produits technologiques avancés, innovants et élégants pour améliorer votre vie quotidienne.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4">Suivez-nous</h4>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-sm mt-6 border-t border-gray-800 pt-4">
+            <p>&copy; 2024 AYouM - Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        document.getElementById('color-selector').addEventListener('change', function() {
+            const newImage = this.value;
+            document.getElementById('product-image').src = newImage;
+        });
+
+        document.querySelectorAll('.color-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const imageSrc = button.getAttribute('data-image');
+                document.getElementById('product-image').src = imageSrc;
+                document.getElementById('color-selector').value = imageSrc;
+            });
+        });
+
+        let quantity = 1;
+        const quantityElement = document.getElementById('quantity');
+        document.getElementById('increase-quantity').addEventListener('click', function() {
+            quantity++;
+            quantityElement.textContent = quantity;
+        });
+
+        document.getElementById('decrease-quantity').addEventListener('click', function() {
+            if (quantity > 1) {
+                quantity--;
+                quantityElement.textContent = quantity;
+            }
+        });
+
+        document.getElementById('toggle-faq').addEventListener('click', function() {
+            const faqSection = document.getElementById('faq');
+            faqSection.classList.toggle('faq-section');
+            const icon = faqSection.classList.contains('faq-section') ? 'fas fa-chevron-right' : 'fas fa-chevron-down';
+            document.getElementById('toggle-faq').className = icon;
+        });
+
+        document.getElementById('toggle-faq-returns').addEventListener('click', function() {
+            const faqReturnsSection = document.getElementById('faq-returns');
+            faqReturnsSection.classList.toggle('faq-section');
+            const icon = faqReturnsSection.classList.contains('faq-section') ? 'fas fa-chevron-right' : 'fas fa-chevron-down';
+            document.getElementById('toggle-faq-returns').className = icon;
+        });
+
+        document.getElementById('toggle-faq-warranty').addEventListener('click', function() {
+            const faqWarrantySection = document.getElementById('faq-warranty');
+            faqWarrantySection.classList.toggle('faq-section');
+            const icon = faqWarrantySection.classList.contains('faq-section') ? 'fas fa-chevron-right' : 'fas fa-chevron-down';
+            document.getElementById('toggle-faq-warranty').className = icon;
+        });
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+        });
+
+        document.getElementById('add-to-cart').addEventListener('click', function() {
+            const selectedColor = document.getElementById('color-selector').value;
+            const selectedImage = document.querySelector(`[data-image="${selectedColor}"]`).getAttribute('data-image');
+            const product = {
+                name: "Montre Intelligente AYouM Pro",
+                price: 299,
+                quantity: quantity,
+                color: selectedColor,
+                image: selectedImage
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert("Produit ajouté au panier!");
+        });
+    </script>
+</body>
+</html>

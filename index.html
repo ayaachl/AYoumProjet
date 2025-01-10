@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYouM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .w-23 {
+            width: 8.75rem;
+        }
+        .imgg {
+            width: 13.75rem;
+        }
+        .w-29 {
+            width: 12.75rem;
+        }
+        .color-noir {
+            background-color: black;
+        }
+        .color-blanc {
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+        .color-vert-eau {
+            background-color: #abcbb6;
+        }
+        .color-mauve-fonce {
+            background-color: #684d74;
+        }
+        .color-bleu {
+            background-color: #6389b3;
+        }
+        .color-gris {
+            background-color: #B0BEC5;
+        }
+        .color-btn {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .text-bordeaux-600 {
+            color: #800020;
+        }
+        .text-bordeaux-800 {
+            color: #66001f;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7fafc;
+            color: #4a4a4a;
+        }
+        #reviewModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #reviewModal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 40%;
+            max-width: 50%;
+            position: relative;
+        }
+
+        .modal-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            text-align: center;
+        }
+
+        .modal-button {
+            background-color: #b83131;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .modal-button:hover {
+            background-color: #a12d2d;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .input-field, .textarea-field {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .comments-container {
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            border-top: 1px solid #ddd;
+        }
+        .comment {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .comment .text-yellow-500 i {
+            margin-right: 2px;
+        }
+
+        .fas, .far {
+            font-size: 16px;
+        }
+
+        a {
+            color: #b83131;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #a12d2d;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-100">
+    <header class="bg-black text-white py-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <img src="logo.png" alt="logo" class="w-23 h-auto">
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="hover:text-gray-400">Accueil</a></li>
+                    <li><a href="product.html" class="hover:text-gray-400">Produit</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400">Contact</a></li>
+                    <li><a href="cart.html" class="hover:text-gray-400">Panier</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="relative w-full h-[480px] bg-cover bg-center" style="background-image: url('pic.jpg');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative z-10 text-center text-white py-24">
+            <h2 class="text-4xl font-semibold mb-4">Explorez <span class="text-bordeaux-600">AYouM</span>, la montre connectée révolutionnaire</h2>
+            <p class="text-xl mb-8">Une alliance parfaite entre technologie, design raffiné et bien-être pour transformer votre quotidien.</p>
+            <a href="product.html" class="text-white px-8 py-3 rounded-full text-xl font-bold hover:bg-blue-700 transition duration-300" style="background-color: #800000;">Commandez dès maintenant</a>
+        </div>
+    </section>
+    <div class="bg-gray-100">
+        <section class="container mx-auto py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <img src="pic2.jpg" alt="Montre Intelligente" class="w-full rounded-lg shadow-lg mb-6">
+            </div>
+            <div>
+                <h2 class="text-4xl font-bold mb-4 text-bordeaux-600">AYouM Pro</h2>
+                <p class="text-xl text-gray-700 mb-4">Découvrez l'élégance et l'innovation réunies dans une montre intelligente. Connectée et riche en fonctionnalités, elle transformera votre quotidien.</p>
+                <div class="mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">Caractéristiques :</h3>
+                    <ul class="list-disc pl-5 text-gray-700">
+                        <li>Écran AMOLED de 1,4 pouces</li>
+                        <li>Suivi de la fréquence cardiaque 24/7</li>
+                        <li>Autonomie jusqu'à 10 jours</li>
+                        <li>Notifications d'appels, SMS et applications</li>
+                        <li>Résistance à l'eau (IP68)</li>
+                        <li>Suivi des activités physiques : marche, course, vélo, etc.</li>
+                        <li>Compatibilité avec iOS et Android</li>
+                    </ul>
+                </div>
+                <div class="mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-2">Couleurs disponibles :</h3>
+                    <div class="flex space-x-4">
+                        <button class="color-btn color-noir"></button>
+                        <button class="color-btn color-blanc"></button>
+                        <button class="color-btn color-vert-eau"></button>
+                        <button class="color-btn color-mauve-fonce"></button>
+                        <button class="color-btn color-bleu"></button>
+                        <button class="color-btn color-gris"></button>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <a href="product.html" class="text-white px-8 py-3 rounded-full text-xl font-bold hover:bg-blue-700 transition duration-300" style="background-color: #800000;">Commandez dès maintenant</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="bg-gray-100">
+        <section class="container mx-auto py-16">
+            <h3 class="text-4xl font-semibold text-center text-gray-700 mb-9">Détails Supplémentaires</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div class="bg-white shadow-lg rounded-lg">
+                    <img src="pic3.webp" alt="Écran AMOLED" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold text-gray-700 mb-4">Écran AMOLED</h4>
+                        <p class="text-gray-600">Profitez d'un affichage lumineux et ultra-réactif même en plein soleil grâce à l'écran AMOLED haute résolution.</p>
+                    </div>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg">
+                    <img src="pic4.jpeg" alt="Suivi de la Santé" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold text-gray-700 mb-4">Suivi de la Santé</h4>
+                        <p class="text-gray-600">Suivez vos paramètres de santé en temps réel avec la surveillance continue de la fréquence cardiaque, de l'oxygénation sanguine et plus encore.</p>
+                    </div>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg">
+                    <img src="pic5.jpg" alt="Connectivité 5G" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h4 class="text-xl font-semibold text-gray-700 mb-4">Connectivité 5G</h4>
+                        <p class="text-gray-600">Restez connecté où que vous soyez. Recevez vos appels, messages et notifications directement sur votre montre, même sans votre téléphone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <section class="relative w-full h-[400px]">
+        <video class="absolute inset-0 w-full h-full object-cover" autoplay loop muted>
+            <source src="vid.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+        </video>
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative z-10 text-center text-white py-24">
+            <center><img src="logo.png" alt="logo" class="imgg h-auto"></center>
+            <p class="text-xl mb-8">La montre intelligente ultime pour un mode de vie moderne. <br>Avec un design élégant et des fonctionnalités de pointe, elle est conçue pour répondre à tous vos besoins quotidiens.</p>
+            <a href="product.html" class="text-white px-8 py-3 rounded-full text-xl font-bold hover:bg-blue-700 transition duration-300" style="background-color: #800000;">Acheter Maintenant</a>
+        </div>
+    </section>
+    <section class="bg-gray-100 py-16">
+        <div class="container mx-auto">
+            <h3 class="text-4xl font-semibold text-gray-700 mb-8 text-center">Avis de nos clients</h3>
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg h-96 overflow-y-auto comments-container">
+            </div>
+        </div>
+        <div class="text-center py-4">
+            <a href="#leave-review" onclick="openModal()" class="text-bordeaux-600 hover:text-bordeaux-800 text-sm">Vous avez déjà commandé AYoum Pro? Laissez votre avis ici.</a>
+        </div>
+    </section>
+    <div id="reviewModal" class="flex ">
+        <div class="modal-content bg-gray-100">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header text-lg"><h1 class="text-3xl"><span class="text-bordeaux-600">AYouM</span> Pro </h1>Laissez un avis</div>
+            <div class="modal-body">
+                <form id="reviewForm">
+                    <label for="name" class="block text-sm font-semibold">Votre nom complet</label>
+                    <input type="text" id="name" class="input-field" placeholder="Entrez votre nom" required>
+                    <label for="comment" class="block text-sm font-semibold">Votre avis</label>
+                    <textarea id="comment" class="textarea-field" placeholder="Partagez votre expérience..." required></textarea>
+                    <label for="rating" class="block text-sm font-semibold">Votre Note</label>
+                    <input type="number" id="rating" class="input-field" min="1" max="5" step="0.5" required>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" onclick="submitReview()" style="background-color: #800000;" class="text-white px-8 py-3 rounded-full text-xl font-bold hover:bg-blue-700 transition duration-300">Partager</button>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-black text-white py-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+            <div>
+                <img src="logo.png" alt="AYouM Logo" class="w-29 mb-4">
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4">À propos de nous</h4>
+                <p class="text-sm text-gray-400">Nous fournissons des produits technologiques avancés, innovants et élégants pour améliorer votre vie quotidienne.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4">Suivez-nous</h4>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-sm mt-6 border-t border-gray-800 pt-4">
+            <p>&copy; 2024 AYouM - Tous droits réservés.</p>
+        </div>
+    </footer>
+<script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function openModal() {
+            document.getElementById('reviewModal').classList.add('show');
+        }
+        function closeModal() {
+            document.getElementById('reviewModal').classList.remove('show');
+        }
+        function submitReview() {
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+            const rating = document.getElementById('rating').value;
+            const photo = 'CA.jpeg';
+            if (!name || !comment || !rating) {
+                alert('Tous les champs sont requis.');
+                return;
+            }
+            const newComment = {
+                name: name,
+                comment: comment,
+                rating: parseFloat(rating),
+                image: photo
+            };
+            fetch('http://localhost:3000/commentaires', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newComment)
+            })
+            .then(response => response.json())
+            .then(data => {
+                addCommentToPage(newComment);
+                closeModal();
+            })
+            .catch(error => console.error('Erreur lors de l\'envoi du commentaire:', error));
+        }
+        function addCommentToPage(comment) {
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment', 'flex', 'items-start', 'p-4', 'border-b');
+            commentElement.innerHTML = `
+                <img src="${comment.image}" alt="${comment.name}" class="w-12 h-12 rounded-full mr-4">
+                <div>
+                    <p class="font-semibold text-blue-600">${comment.name}</p>
+                    <p class="text-gray-700 text-sm">${comment.comment}</p>
+                    <div class="flex mt-1 text-yellow-500">
+                        ${generateStars(comment.rating)}
+                    </div>
+                </div>
+            `;
+            const commentsContainer = document.querySelector('.comments-container');
+            commentsContainer.appendChild(commentElement);
+        }
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i - 0.5 === rating) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+        fetch('http://localhost:3000/commentaires')
+            .then(response => response.json())
+            .then(data => {
+                const commentsContainer = document.querySelector('.comments-container');
+                data.forEach(comment => {
+                    addCommentToPage(comment);
+                });
+            })
+            .catch(error => console.error('Erreur lors de la récupération des commentaires:', error));
+    </script>
+</body>
+</html>

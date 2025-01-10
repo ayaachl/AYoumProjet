@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYouM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .w-23 {
+            width: 8.75rem;
+        }
+        .imgg {
+            width: 13.75rem;
+        }
+        .button-style {
+            background-color: #800000;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 1.375rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .button-style:hover {
+            background-color: #5b0000;
+        }
+        .item-container {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0.375rem;
+            padding: 1rem;
+            background-color: white;
+            margin-bottom: 1rem;
+        }
+        .w-29 {
+            width: 12.75rem;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-100">
+    <header class="bg-black text-white py-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <img src="logo.png" alt="logo" class="w-23 h-auto">
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="hover:text-gray-400">Accueil</a></li>
+                    <li><a href="product.html" class="hover:text-gray-400">Produit</a></li>
+                    <li><a href="contact.html" class="hover:text-gray-400">Contact</a></li>
+                    <li><a href="cart.html" class="hover:text-gray-400">Panier (<span id="cart-count">0</span>)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section class="container mx-auto py-16">
+        <h2 class="text-4xl font-semibold text-center text-gray-800 mb-12">Votre Panier</h2>
+        <div id="cart-items" class="space-y-8"></div>
+        <div id="cart-total" class="flex justify-between items-center mt-12 text-xl font-bold text-gray-800">
+            <span>Total:</span>
+            <span id="total-price">€0</span>
+        </div>
+        <div class="mt-8 text-center">
+            <a href="checkout.html" style="background-color: #800000;" class="text-white px-8 py-3 rounded-full text-xl font-bold hover:bg-blue-700 transition duration-300">Procéder au Paiement</a>
+        </div>
+    </section>
+    <footer class="bg-black text-white py-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+            <div>
+                <img src="logo.png" alt="AYouM Logo" class="w-29 mb-4">
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4">À propos de nous</h4>
+                <p class="text-sm text-gray-400">Nous fournissons des produits technologiques avancés, innovants et élégants pour améliorer votre vie quotidienne.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-4">Suivez-nous</h4>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-gray-300"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-sm mt-6 border-t border-gray-800 pt-4">
+            <p>&copy; 2024 AYouM - Tous droits réservés.</p>
+        </div>
+    </footer>
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalPriceElement = document.getElementById('total-price');
+            let totalPrice = 0;
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-center text-lg text-gray-600">Votre panier est vide.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    const itemTotalPrice = item.price * item.quantity;
+                    totalPrice += itemTotalPrice;
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'item-container flex justify-between items-center';
+                    itemElement.innerHTML = `
+                        <div class="flex items-center space-x-4">
+                            <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded-md">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800">${item.name}</h3>
+                                <p class="text-gray-600">€${item.price} x ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button onclick="removeItem(${index})" class="text-red-500 hover:text-red-700">Supprimer</button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+            }
+            totalPriceElement.textContent = `€${totalPrice.toFixed(2)}`;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+        function removeItem(index) {
+            cart.splice(index, 1);
+            updateCart();
+            alert("Article supprimé du panier");
+        }
+        updateCart();
+    </script>
+</body>
+</html>
